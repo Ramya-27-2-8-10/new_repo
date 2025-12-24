@@ -1,0 +1,193 @@
+<section class="travel-banner">
+  <div class="content-wrapper">
+    <div class="text-content">
+      <h1>Enjoy your<br><span class="moment">Moment</span></h1>
+      <p class="description">— the kind that lingers in your soul long after the journey ends.</p>
+    </div>
+
+    <div class="polaroid-group">
+      <div class="polaroid polaroid-1">
+        <div class="polaroid-image temple"></div>
+      </div>
+      <div class="polaroid polaroid-2">
+        <div class="polaroid-image beach"></div>
+        <div class="polaroid-label">France</div>
+      </div>
+      <div class="polaroid polaroid-3">
+        <div class="polaroid-image green"></div>
+        <div class="polaroid-label">Bali</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking-section">
+  <div class="wizard-container">
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" [style.width.%]="(currentStep / totalSteps) * 100"></div>
+    </div>
+
+    <div class="progress-bar-wrapper">
+      <div class="progress-line">
+        <div class="progress-fill" [style.width.%]="(currentStep - 1) / (totalSteps - 1) * 100"></div>
+      </div>
+
+      <div class="progress-steps">
+        <div 
+          class="step" 
+          *ngFor="let step of steps; let i = index" 
+          [class.active]="currentStep === i + 1" 
+          [class.completed]="currentStep > i + 1"
+        >
+          <div class="step-icon">
+            <img [src]="step.icon" [alt]="step.label" />
+          </div>
+          <div class="step-label">{{ step.label }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <!-- Step 1: Personal Info -->
+      <div class="form-step" [class.active]="currentStep === 1">
+        <h2>Personal Information</h2>
+        <div class="form-stack">
+          <input formControlName="fullName" placeholder="Full Name" />
+          <div class="error" *ngIf="bookingForm.get('fullName')?.touched && bookingForm.get('fullName')?.invalid">
+            Please fill the field
+          </div>
+
+          <input formControlName="city" placeholder="City of Residence" />
+
+          <input formControlName="email" placeholder="Email Address" />
+          <div class="error" *ngIf="bookingForm.get('email')?.touched && bookingForm.get('email')?.invalid">
+            Please fill the field
+          </div>
+
+          <input formControlName="phone" placeholder="Phone Number" />
+          <div class="error" *ngIf="bookingForm.get('phone')?.touched && bookingForm.get('phone')?.invalid">
+            Please fill the field
+          </div>
+
+          <input formControlName="whatsapp" placeholder="WhatsApp Number (Optional)" />
+        </div>
+      </div>
+
+      <!-- Step 2: Travel Details -->
+      <div class="form-step" [class.active]="currentStep === 2">
+        <h2>Travel Details</h2>
+        <div class="form-stack">
+          <small class="hint">Select your travel start date</small>
+          <input formControlName="startDate" type="date" [min]="minDate" placeholder="Start Date" />
+          <div class="error" *ngIf="bookingForm.get('startDate')?.touched && bookingForm.get('startDate')?.invalid">
+            Please select a valid start date
+          </div>
+
+          <small class="hint">Select your travel end date</small>
+          <input formControlName="endDate" type="date" [min]="bookingForm.get('startDate')?.value || minDate" placeholder="End Date" />
+          <div class="error" *ngIf="bookingForm.get('endDate')?.touched && bookingForm.get('endDate')?.invalid">
+            Please select a valid end date
+          </div>
+
+          <input formControlName="peopleCount" type="number" placeholder="Number of People" />
+          <div class="error" *ngIf="bookingForm.get('peopleCount')?.touched && bookingForm.get('peopleCount')?.invalid">
+            Please fill the field
+          </div>
+        </div>
+        <div class="error" *ngIf="bookingForm.errors?.['dateRangeInvalid']">
+          End date must be after start date
+        </div>
+      </div>
+
+      <!-- Step 3: Destination -->
+      <div class="form-step" [class.active]="currentStep === 3">
+        <h2>Choose Your Destination</h2>
+        <div class="form-stack">
+          <select formControlName="destination" [disabled]="true">
+            <option [value]="bookingForm.get('destination')?.value">
+              {{ bookingForm.get('destination')?.value }}
+            </option>
+          </select>
+          <div class="price-display">
+            Package Price: {{ bookingForm.get('amount')?.value }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Special Requests -->
+      <div class="form-step" [class.active]="currentStep === 4">
+        <h2>Special Requests</h2>
+        <div class="form-stack">
+          <textarea formControlName="specialRequests" placeholder="Any special requirements or requests? (Optional)" rows="6"></textarea>
+        </div>
+      </div>
+
+      <!-- Step 5: Confirmation -->
+      <div class="form-step" [class.active]="currentStep === 5">
+        <div class="confirmation-content">
+          <ng-container *ngIf="bookingConfirmed; else bookingError">
+            <div class="success-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+
+            <h2>Booking Confirmed!</h2>
+            <p class="confirmation-subtitle">Review the terms and conditions below</p>
+
+            <div class="terms-box">
+              <h3>Terms and Conditions for Online Payment</h3>
+              <p>These terms and conditions govern the use of the online payment system of the Tourism and Civil Aviation Department. By using this service, you agree to comply with these terms and conditions.</p>
+              <ul>
+                <li>Payments are for services like hotels, homestays, travel agencies, and tour guides.</li>
+                <li>Accurate data is required; errors are the user's responsibility.</li>
+                <li>Only authorized methods like credit/debit cards, UPI, or net banking are accepted.</li>
+                <li>Duplicate payments follow the refund policy.</li>
+                <li>Secure devices and connections are mandatory.</li>
+                <li>Transaction IDs must not be shared.</li>
+                <li>Delays due to technical issues or misuse are not the Department's liability.</li>
+                <li>Data is processed securely via third-party gateways and not stored by the Department.</li>
+                <li>Terms may change without notice and apply immediately.</li>
+              </ul>
+
+              <div class="booking-wrapper">
+                <label class="terms">
+                  <input 
+                    type="checkbox" 
+                    [(ngModel)]="agreedToTerms" 
+                    name="terms" 
+                    [ngModelOptions]="{ standalone: true }" />
+                    I agree to the terms and conditions
+                </label>
+
+                <button 
+                  type="button"
+                  [disabled]="!agreedToTerms" 
+                  (click)="goToPayment()" 
+                  class="pay-now-button">
+                  Pay Now
+                </button>                 
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #bookingError>
+            <h2>Booking Failed</h2>
+            <p class="confirmation-subtitle">Please check your form and try again.</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="wizard-navigation" *ngIf="currentStep < 5">
+        <button type="button" class="btn-prev" [disabled]="currentStep === 1" (click)="previousStep()">Previous</button>
+        <button type="button" class="btn-next" (click)="nextStep()">
+          {{ currentStep === 4 ? 'Submit' : 'Next' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

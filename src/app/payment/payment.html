@@ -1,0 +1,67 @@
+<section class="payment">
+  <div class="payment-container">
+    <div class="payment-header">
+      <div class="icon-wrapper">
+  <img src="assets/icons/download.png" alt="Payment Icon" class="payment-icon" />
+</div>
+      <h2>Complete Your Payment</h2>
+      <p class="subtitle">Secure & Fast Transaction via Razorpay</p>
+    </div>
+
+    <div class="payment-details">
+      <div class="detail-card">
+        <span class="detail-label">Destination</span>
+        <span class="detail-value">{{ destination }}</span>
+      </div>
+      <div class="detail-card">
+        <span class="detail-label">Amount</span>
+        <span class="detail-value amount-highlight">{{ amount }}</span>
+      </div>
+      <div class="detail-card">
+        <span class="detail-label">User Name</span>
+        <span class="detail-value">{{ fullName }}</span>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="button" (click)="launchRazorpay()" class="btn btn-primary">
+        <span>Pay with Razorpay</span>
+      </button>
+      <button type="button" (click)="goBack()" class="btn btn-secondary">
+        <span>Back to Booking</span>
+      </button>
+    </div>
+
+    <!-- <div *ngIf="paymentConfirmed" class="success-message">
+      <div class="success-icon">
+        
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h3>Payment Confirmed!</h3>
+      <p>{{ destination }} • {{ amount }}</p>
+    </div> -->
+    <div *ngIf="paymentConfirmed" class="success-message">
+  <div class="success-icon">
+    <img src="assets/icons/confirm.png" alt="Payment Confirmed">
+  </div>
+  <h3>Payment Confirmed!</h3>
+  <p>{{ destination }} • {{ amount }}</p>
+</div>
+
+    <div *ngIf="paymentConfirmed" class="download-section">
+      <button (click)="downloadTicket()" class="btn btn-download">
+        
+        <span>Download Ticket</span>
+      </button>
+    </div>
+
+
+
+
+
+
+
+
+      

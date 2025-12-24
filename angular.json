@@ -1,0 +1,102 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "webportal": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+           "options": {
+  "outputPath": "dist/webportal",
+  "index": "src/index.html",
+  "main": "src/main.ts",
+  "polyfills": ["zone.js"],
+  "tsConfig": "tsconfig.app.json",
+  "assets": [
+    "src/favicon.ico",
+    "src/assets"
+  ],
+  "styles": ["src/styles.css"],
+  "allowedCommonJsDependencies": [
+    "canvg",
+    "jspdf",
+    "html2canvas",
+    "raf",
+    "rgbcolor",
+    "core-js"
+  ]
+},
+
+          
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1.2MB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kB",
+                  "maximumError": "15kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "webportal:build:production"
+            },
+            "development": {
+              "buildTarget": "webportal:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              
+                "src/favicon.ico",
+                "src/assets"
+                
+              
+            ],
+            "styles": [
+              "src/styles.css"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "45cda9a0-a4be-4606-9aa8-d8473d313b16"
+  }
+}

@@ -1,0 +1,94 @@
+<section class="destinations-section">
+  <!-- Header -->
+  <div class="header-image">
+    <img src="/assets/images/varanasi/ghats.jpg" alt="Scenic travel banner" class="header-banner" />
+    <h1 class="main-title">Uncover hidden gems</h1>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="search-wrapper">
+      <!-- Filter Panel -->
+      <div class="search-panel">
+        <h3>Search Filters</h3>
+
+        <input
+          type="text"
+          class="form-control mb-2"
+          placeholder="Search by name..."
+          [(ngModel)]="searchTerm"
+          (input)="filterDestinations()"
+        />
+        <select
+        class="form-select mb-4"
+        [(ngModel)]="selectedTag"
+        (change)="filterDestinations()">
+            <option value="">All Tags</option>
+            <option *ngFor="let tag of tagOptions" [value]="tag">{{ tag }}</option>
+        </select>
+        <input
+          type="number"
+          class="form-control mb-2"
+          placeholder="Max Price (₹)"
+          [(ngModel)]="maxPrice"
+          (input)="filterDestinations()"
+        />
+
+        <select
+          class="form-select mb-2"
+          [(ngModel)]="selectedDuration"
+          (change)="filterDestinations()"
+        >
+          <option value="">All Durations</option>
+          <option *ngFor="let d of durationOptions" [value]="d">{{ d }}</option>
+        </select>
+
+        <select
+          class="form-select mb-2"
+          [(ngModel)]="selectedSeason"
+          (change)="filterDestinations()"
+        >
+          <option value="">All Seasons</option>
+          <option *ngFor="let s of seasonOptions" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+
+    
+      <div class="destinations-grid">
+        <div class="destinations-card" *ngFor="let destination of filteredDestinations">
+          <div class="card-image-wrapper">
+            <img [src]="destination.image" [alt]="destination.name" />
+            <span class="badge" *ngIf="destination.tags.includes('luxury')">Top Pick</span>
+          </div>
+
+          <div class="card-content">
+            <h3>{{ destination.name }}</h3>
+            <p class="location">{{ destination.location.region }}, {{ destination.location.country }}</p>
+
+            <div class="info-row">
+              <span><i class="fa fa-clock-o"></i> {{ destination.duration }}</span>
+              <span><i class="fa fa-inr"></i> {{ destination.price }}</span>
+              <span><i class="fa fa-calendar"></i> {{ destination.bestTimeToVisit }}</span>
+            </div>
+
+            <p class="description"><i>{{ destination.shortDescription }}</i></p>
+
+            <div class="rating-stars">
+              <ng-container *ngFor="let star of [1,2,3,4,5]">
+                <i class="fa" [ngClass]="star <= destination.rating ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+              </ng-container>
+            </div>
+
+            <a [routerLink]="['/destination', destination.id]" class="btn btn-warning">Explore</a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="filteredDestinations.length === 0" class="text-center mt-4">
+      <p>No destinations match your filters. Try adjusting your search.</p>
+    </div>
+    </div>
+
+    
+    
+  </div>
+</section>

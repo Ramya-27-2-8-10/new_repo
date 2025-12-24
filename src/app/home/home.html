@@ -1,0 +1,194 @@
+<!-- Hero Section with Single Background Image -->
+<div class="hero-section">
+  <video autoplay muted loop playsinline class="bg-video">
+  <source [src]="videoUrl" type="video/mp4" />
+</video>
+  <div class="center-content">
+    <div class="content-box text-center">
+      <h1 class="fw-bold">Life-changing travel, worldclass</h1>
+      <p>
+        The real voyage of discovery consists not in seeking new landscapes,<br>
+        but in having new eyes.<br>
+        Discover it with <strong>ExploreHub</strong> - the No.1 travel brand 
+      </p>
+      <button class="enquire-btn" (click)="goToBooknow()">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+ <body>
+<section>
+<div class="premium-tour-grid">
+  <div class="section-heading">
+    <span class="heading-main">EXPLORE</span>
+    <span class="heading-sub">Premium Group Tours</span>
+  </div>
+
+  <div
+    class="destination-card"
+    *ngFor="let destination of destinations"
+  >
+    <img [src]="destination.image" [alt]="destination.name" />
+
+    <div class="card-info">
+      <h3>{{ destination.name }}</h3>
+      <p>{{ destination.shortDescription }}</p>
+
+    </div>
+
+    <div class="hover-action">
+      <button (click)="goToDetails(destination.id)">Explore Now</button>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+<section class="why-choose-us">
+  <div class="choose-header">
+    <h2>Why You Choose Us?</h2>
+    <p>We’re not just a booking platform — we’re your travel companion. From curated itineraries to seamless support, we make every journey unforgettable. Discover why travelers trust us to turn their dream vacations into reality.</p>
+  </div>
+
+  <div class="choose-features">
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-clipboard-check"></i></div>
+      <h3>Tailored Itineraries</h3>
+      <p>Every tour is thoughtfully designed to match your interests, pace, and preferences — no generic packages, just personalized experiences.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+      <h3>Seamless Planning</h3>
+      <p>From transport to accommodation, we handle the logistics so you can focus on enjoying your trip. Booking is smooth, fast, and intuitive.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+      <h3>Trusted Insights</h3>
+      <p>We highlight hidden gems, local favorites, and seasonal tips — giving you insider access to every destination you explore.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-headset"></i></div>
+      <h3>24/7 Support</h3>
+      <p>Whether you need help before departure or during your journey, our team is always available to assist you with care and clarity.</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="faq-chat-section">
+    <div class="container">
+      <h2 class="text-center mb-5"><b>Frequently Asked Questions</b></h2>
+
+      <div class="faq-layout">
+        <!-- Left: Chat Bubbles -->
+        <div class="faq-chat">
+          <div class="chat-bubble faq-user">
+            <div class="chat-icon"><i class="fas fa-user"></i></div>
+            <div class="chat-text">What’s included in a premium tour package?</div>
+          </div>
+          <div class="chat-bubble faq-brand">
+            <div class="chat-icon"><i class="fas fa-globe-asia"></i></div>
+            <div class="chat-text">Accommodation, guided experiences, local transport, select meals, and curated activities.</div>
+          </div>
+
+          <div class="chat-bubble faq-user">
+            <div class="chat-icon"><i class="fas fa-user"></i></div>
+            <div class="chat-text">How do I book a tour?</div>
+          </div>
+          <div class="chat-bubble faq-brand">
+            <div class="chat-icon"><i class="fas fa-globe-asia"></i></div>
+            <div class="chat-text">Choose your destination and travel dates, then submit our enquiry form.</div>
+          </div>
+
+          <div class="chat-bubble faq-user">
+            <div class="chat-icon"><i class="fas fa-user"></i></div>
+            <div class="chat-text">Can I customize a group tour?</div>
+          </div>
+          <div class="chat-bubble faq-brand">
+            <div class="chat-icon"><i class="fas fa-globe-asia"></i></div>
+            <div class="chat-text">Yes, private groups can request custom dates, activities, or upgrades.</div>
+          </div>
+
+          <div class="chat-bubble faq-user">
+            <div class="chat-icon"><i class="fas fa-user"></i></div>
+            <div class="chat-text">What is the cancellation policy?</div>
+          </div>
+          <div class="chat-bubble faq-brand">
+            <div class="chat-icon"><i class="fas fa-globe-asia"></i></div>
+            <div class="chat-text">Each tour has its own cancellation terms listed on the tour details page.</div>
+          </div>
+        </div>
+
+        <!-- Right: Image Collage -->
+        <div class="faq-images">
+          <div class="faq-tagline">
+            <h4><i class="fas fa-quote-left me-2"></i>Every journey begins with a question.</h4>
+          </div>
+          <div class="image-collage">
+            <img src="assets/images/slide1.jpg" alt="Tiger" class="collage-img img1" />
+            <img src="assets/images/slide2.jpg" alt="Bike Ride" class="collage-img img2" />
+            <img src="assets/images/slide3.jpg" alt="Eiffel Tower" class="collage-img img3" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="testimonial-header">
+  <h2>TESTIMONIALS</h2>
+  <h1 class="highlight">What Our Customers Say</h1>
+  <p class="subtext">
+    Discover how travelers like you experienced unforgettable journeys with us. From seamless bookings to breathtaking destinations, their stories say it all.
+  </p>
+
+
+
+<div class="testimonial-carousel">
+  <div
+    *ngFor="let testimonial of testimonials; let i = index"
+    [ngClass]="getCardClass(i)"
+    class="card"
+  >
+    
+     <div class="profile-wrapper">
+      <img [src]="testimonial.image" [alt]="testimonial.name" class="profile-pic" />
+    </div>
+    <p class="review">{{ testimonial.quote }}</p>
+    <h3>{{ testimonial.name }}</h3>
+    <span>{{ testimonial.handle }}</span>
+    <div class="stars">
+  <ng-container *ngFor="let star of [1,2,3,4,5]">
+    <span [class.filled]="star <= testimonial.rating">&#9733;</span>
+  </ng-container>
+</div>
+
+  </div>
+</div>
+</section>
+</body>
+
+
+
+
+
+
+
+
+

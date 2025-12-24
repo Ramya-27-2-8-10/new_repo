@@ -1,0 +1,45 @@
+<nav class="glass-nav">
+  <div class="nav-container">
+    <a class="brand" routerLink="/home" (click)="closeNavbar()">
+      <div class="logo1">
+        <div class="logo1-icon">
+          <div class="logo1-circle">
+            <div class="compass-needle"></div>
+          </div>
+        </div>
+        <div class="logo1-text">
+          <span class="logo1-explore">Explore</span><span class="logo1-hub">Hub</span>
+        </div>
+      </div>
+    </a>
+
+    <button class="nav-toggle" (click)="toggleNavbar()" aria-label="Toggle navigation">
+      <span class="hamburger" [class.active]="navbarOpen"></span>
+    </button>
+
+    <div class="nav-menu" [class.active]="navbarOpen">
+      <a class="nav-link" routerLink="/home" routerLinkActive="active" (click)="closeNavbar()">
+        <span class="link-text">Home</span>
+      </a>
+      <a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNavbar()">
+        <span class="link-text">About</span>
+      </a>
+      <a class="nav-link" routerLink="/destinations" routerLinkActive="active" (click)="closeNavbar()">
+        <span class="link-text">Destinations</span>
+      </a>
+      <a class="nav-link" routerLink="/booknow" routerLinkActive="active" (click)="closeNavbar()">
+        <span class="link-text">Book Now</span>
+      </a>
+      <a class="nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeNavbar()">
+        <span class="link-text">Contact</span>
+      </a>
+      <a class="nav-link login-btn" routerLink="/login" routerLinkActive="active" (click)="closeNavbar()">
+        <i class="fas fa-user-circle"></i>
+      </a>
+
+      </div>
+  </div>
+</nav> 
+
+  
+
