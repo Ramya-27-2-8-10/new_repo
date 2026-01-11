@@ -66,7 +66,7 @@ export class Home implements OnInit, AfterViewInit {
   videoUrl: SafeResourceUrl;
 
   constructor(private router: Router, private sanitizer: DomSanitizer) {
-    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/videos/homepage.mp4');
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl('/assets/videos/homepage.mp4');
   }
 
   ngOnInit(): void {
