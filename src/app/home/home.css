@@ -441,6 +441,53 @@ body {
 .collage-img.animate-in {
   animation: floatIn 1s ease-out forwards;
 }
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .faq-images {
+    flex: 1 1 100%;
+    align-items: center; /* center instead of right */
+  }
+
+  .faq-tagline {
+    text-align: center;
+    padding-right: 0;
+    font-size: 1rem;
+  }
+
+  .image-collage {
+    margin-top: 0;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* spacing between images */
+    position: static; /* remove absolute stacking */
+  }
+
+  .collage-img {
+    position: static; /* no overlap */
+    width: 90%; /* shrink to fit screen */
+    max-width: 320px;
+    height: auto; /* keep aspect ratio */
+    opacity: 1; /* visible immediately */
+    animation: none; /* optional: disable floatIn for mobile */
+  }
+
+  /* Remove hover scaling for touch devices */
+  .collage-img:hover {
+    transform: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Reset custom positions */
+  .img1, .img2, .img3 {
+    top: auto;
+    left: auto;
+    animation-delay: 0s;
+    z-index: auto;
+  }
+}
 
 @keyframes floatIn {
   from {
@@ -613,8 +660,57 @@ span {
   color: #f5b301;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
+  /* Fix testimonial header layout */
+  .testimonial-header {
+    padding: 0 1rem;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2; /* ensures it stays above background image */
+  }
+
+  .testimonial-header h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  .testimonial-header .highlight {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  .testimonial-header .subtext {
+    font-size: 0.95rem;
+    max-width: 90%;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  
+
+}
+@media (max-width: 768px) {
+  .card {
+  position: absolute;
+  width: 300px;
+  padding: 30px;
+  background: rgba(223, 221, 221, 0.686);
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  opacity: 0;
+  filter: blur(4px);
+  transform: scale(0.8);
+}
+}
+
+
+
+@media (max-width: 768px) {
+
+  /* Fix collage image collapse */
   .faq-layout {
     flex-direction: column;
     align-items: center;
@@ -622,38 +718,48 @@ span {
 
   .faq-images {
     align-items: center;
+    width: 100%;
   }
 
   .faq-tagline {
     text-align: center;
     padding-right: 0;
+    font-size: 1rem;
   }
 
   .image-collage {
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    position: static;
+    position: relative;
+    height: 400px;
+    width: 100%;
+    margin-top: -20px;
   }
 
   .collage-img {
-    position: static;
-    width: 100%;
-    max-width: 300px;
+    position: absolute;
+    width: 300px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 12px;
   }
-  
-  .content-box h1 {
-    font-size: 1.8rem;
+
+  .img1 {
+    top: 0;
+    left: 0;
+    z-index: 3;
   }
-  
-  .content-box p {
-    font-size: 1rem;
+
+  .img2 {
+    top: 60px;
+    left: 60px;
+    z-index: 2;
+  }
+
+  .img3 {
+    top: 120px;
+    left: 120px;
+    z-index: 1;
   }
 }
-
-
-
 
 
 
